@@ -18,6 +18,10 @@ sudo apt-get -y install npm
 sudo npm install -g n
 sudo n stable
 ```
+For redis-server,
+```
+sudo apt install redis-server
+```
 we choose clang-6.0 to compile afl and browsers smoothly.
 ```
 sudo apt-get -y install clang-6.0
