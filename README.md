@@ -1,6 +1,6 @@
 # DIE
 
-Repository for "DIE: Fuzzing JavaScript Engines with Aspect-preserving Mutation" (in S&P'20). You can check the [paper](https://gts3.org/assets/papers/2020/park:die.pdf) for technical details. 
+Repository for "Fuzzing JavaScript Engines with Aspect-preserving Mutation" (in S&P'20). You can check the [paper](https://gts3.org/assets/papers/2020/park:die.pdf) for technical details. 
 
 
 ## Environment
