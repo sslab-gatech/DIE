@@ -69,7 +69,7 @@ You can check the corpus is being executed with below command as well.
 ```
 tmux ls
 ```
-If a session named corpus exists, it's still executing corpus.
+If a session named `corpus` exists, it's still executing corpus.
 ### Client Setup
 * Make ssh-tunnel for connection with redis-server
 ```
@@ -85,4 +85,4 @@ If a session named corpus exists, it's still executing corpus.
 ```
 tmux ls
 ```
-You can find a session named fuzzer if it's running.
+You can find a session named `fuzzer` if it's running.
