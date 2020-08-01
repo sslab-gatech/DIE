@@ -86,3 +86,31 @@ $ ./fuzz/scripts/run.sh [target binary path]
 $ tmux ls
 ```
 You can find a session named `fuzzer` if it's running.
+
+## CVEs
+If you find bugs and get CVEs by running DIE, please let us know.
+
+* ChakraCore: CVE-2019-0609, CVE-2019-1023, CVE-2019-1300, CVE-2019-0990, CVE-2019-1092
+* JavaScriptCore: CVE-2019-8676, CVE-2019-8673, CVE-2019-8811, CVE-2019-8816
+* V8: CVE-2019-13730, CVE-2019-13764, CVE-2020-6382
+
+## Contacts
+
+* Soyeon Park <soyeon@gatech.edu>
+* Wen Xu <wen.xu@gatech.edu>
+* Insu Yun <insu@gatech.edu>
+* Daehee Jang <daehee87@gatech.edu>
+* Taesoo Kim <taesoo@gatech.edu>
+
+## Citation
+
+```
+@inproceedings{park:die,
+  title        = {{Fuzzing JavaScript Engines with Aspect-preserving Mutation}},
+  author       = {Soyeon Park and Wen Xu and Insu Yun and Daehee Jang and Taesoo Kim},
+  booktitle    = {Proceedings of the 41st IEEE Symposium on Security and Privacy (Oakland)},
+  month        = may,
+  year         = 2020,
+  address      = {San Francisco, CA},
+}
+```
