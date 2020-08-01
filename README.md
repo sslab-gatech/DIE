@@ -42,7 +42,7 @@ To compile whole project,
 
 ### Server Setup
 * Make Corpus Directory
-We used [Die-corpus](https://github.com/sslab-gatech/DIE-corpus.git) as corpus.
+(We used [Die-corpus](https://github.com/sslab-gatech/DIE-corpus.git) as corpus)
 ```
 git clone https://github.com/sslab-gatech/DIE-corpus.git
 python3 ./fuzz/scripts/make_initial_corpus.py ./DIE-corpus ./corpus
