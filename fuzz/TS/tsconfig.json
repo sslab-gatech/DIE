@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "es7"
+    ],
+  },
+  "includes": [
+    "*"
+  ],
+}

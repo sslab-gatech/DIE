@@ -1,0 +1,17 @@
+test*/
+samples/
+node_modules/
+*.swo
+test*.js
+out*
+.flowconfig
+err
+grammar/
+!grammar/Types.g4
+!grammar/Simple.g4
+/__pycache__/
+*.pyc
+
+*.js
+*.js.map
+package-lock.json

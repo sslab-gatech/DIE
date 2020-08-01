@@ -1,0 +1,54 @@
+{
+  "name": "esfuzz",
+  "version": "0.0.0",
+  "description": "esfuzz",
+  "main": "esfuzz.ts",
+  "author": {
+    "name": "Soyeon Park",
+    "email": ""
+  },
+  "dependencies": {
+    "@babel/generator": "7.3.3",
+    "@babel/parser": "7.3.3",
+    "@babel/traverse": "7.2.3",
+    "@babel/types": "7.3.3",
+    "@types/argparse": "^1.0.36",
+    "@types/async": "^2.4.1",
+    "@types/babel__generator": "7.0.2",
+    "@types/babel__traverse": "7.0.6",
+    "@types/js-beautify": "^1.8.0",
+    "@types/node": "^10.12.26",
+    "@types/redis": "^2.8.12",
+    "antlr4ts": "^0.5.0-alpha.2",
+    "argparse": "^1.0.10",
+    "ast-pretty-print": "^2.0.1",
+    "async": "^2.6.2",
+    "balanced-match": "^1.0.0",
+    "child_process": "^1.0.2",
+    "escodegen": "^1.8.0",
+    "escope": "^3.6.0",
+    "esprima": "^4.0.1",
+    "js-beautify": "^1.8.9",
+    "path": "^0.12.7",
+    "random-js": "^2.1.0",
+    "redis": "^2.8.0",
+    "typescript": "^3.4.4",
+    "vm2": "^3.6.10"
+  },
+  "devDependencies": {
+    "antlr4ts-cli": "^0.5.0-alpha.2",
+    "arg": "^4.1.0",
+    "babel": "6.23.0",
+    "colors": "^1.3.3",
+    "estraverse": "^4.2.0",
+    "glob": "^7.1.3",
+    "tmp": "0.0.33",
+    "vm2": "^3.6.10"
+  },
+  "scripts": {
+    "antlr4ts": "antlr4ts -visitor ./grammar/Simple.g4",
+    "js-beautify": "^1.8.9",
+    "sqlite3": "^4.0.6",
+    "ts-node": "^8.0.2"
+  }
+}

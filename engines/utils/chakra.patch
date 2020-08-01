@@ -1,0 +1,114 @@
+diff --git bin/ch/ch.cpp bin/ch/ch.cpp
+index c78cad6..9442614 100644
+--- bin/ch/ch.cpp
++++ bin/ch/ch.cpp
+@@ -14,6 +14,7 @@
+ 
+ #ifdef __linux__
+ #include <sys/sysinfo.h>
++#include <vector>
+ #elif defined(__APPLE__)
+ #include <sys/sysctl.h>
+ #endif
+@@ -1112,6 +1113,56 @@ unsigned int WINAPI StaticThreadProc(void *lpParam)
+     return ExecuteTestWithMemoryCheck(argInfo->filename);
+ }
+ 
++bool insertLoadScriptFile(std::vector<LPSTR> &filenames, LPSTR mainjs)
++{
++    FILE * file = NULL;
++    size_t lengthBytes = 0;
++    size_t len = filenames.size();
++    BYTE * buffer = nullptr;
++    bool ret = true;
++
++    if (len > 0) {
++        if (fopen_s(&file, mainjs, "rb") != 0) {
++            fprintf(stderr, "Error in opening file '%s' ", mainjs);
++            exit(1);
++        } else {
++            fseek(file, 0, SEEK_END);
++            lengthBytes = ftell(file);
++            fseek(file, 0, SEEK_SET);
++            buffer = (LPBYTE)malloc(lengthBytes);
++            size_t readBytes = fread(buffer, sizeof(BYTE), lengthBytes, file);
++            if (readBytes != lengthBytes) {
++                fprintf(stderr, "Error in reading file '%s' ", mainjs);
++                ret = false;
++                fclose(file);
++                goto free_buffer;
++            }
++            fclose(file);
++            if (fopen_s(&file, mainjs, "wb") != 0) {
++                fprintf(stderr, "Error in writing file '%s' ", mainjs);
++                ret = false;
++                goto free_buffer;
++            } 
++            for (size_t i = 0; i < len; i++) 
++                fprintf(file, "WScript.LoadScriptFile(\"%s\");\n", filenames[i]);
++            size_t writeBytes = fwrite(buffer, sizeof(BYTE), lengthBytes, file);
++            if (writeBytes != lengthBytes) {
++                fprintf(stderr, "Error in writing file '%s' ", mainjs);
++                ret = false;
++                fclose(file);
++                goto free_buffer;
++            }
++            fclose(file);
++        }
++    }
++
++free_buffer:
++    if (buffer != nullptr)
++        free(buffer);
++
++    return ret;
++}
++
+ #ifndef _WIN32
+ static char16** argv = nullptr;
+ int main(int argc, char** c_argv)
+@@ -1122,6 +1173,7 @@ int main(int argc, char** c_argv)
+ #endif
+     int origargc = argc; // store for clean-up later
+     argv = new char16*[argc];
++    std::vector<LPSTR> filenames;
+     for (int i = 0; i < argc; i++)
+     {
+         NarrowStringToWideDynamic(c_argv[i], &argv[i]);
+@@ -1244,6 +1296,13 @@ int _cdecl wmain(int argc, __in_ecount(argc) LPWSTR argv[])
+             LPCWSTR startEventStr = argv[i] + wcslen(_u("-TTDStartEvent="));
+             startEventCount = (UINT32)_wtoi(startEventStr);
+         }
++        else if(wcsstr(argv[i], _u("-lib=")) == argv[i])
++        {
++            LPCWSTR file_str = argv[i] + wcslen(_u("-lib="));
++            char *filename;
++            WideStringToNarrowDynamic(file_str, &filename);
++            filenames.push_back(filename);
++        }
+         else
+         {
+             wchar *temp = argv[cpos];
+@@ -1271,7 +1330,7 @@ int _cdecl wmain(int argc, __in_ecount(argc) LPWSTR argv[])
+ #endif // _WIN32
+ 
+     HostConfigFlags::HandleArgsFlag(argc, argv);
+-
++    
+     argInfo = { argc, argv, PrintUsage, nullptr };
+     success = ChakraRTInterface::LoadChakraDll(&argInfo, &chakraLibrary);
+ 
+@@ -1285,6 +1344,13 @@ int _cdecl wmain(int argc, __in_ecount(argc) LPWSTR argv[])
+         WideStringToNarrowDynamic(argv[1], &argInfo.filename);
+     }
+ 
++    if (!insertLoadScriptFile(filenames, argInfo.filename)) {
++        PrintUsage();
++        PAL_Shutdown();
++        retval = EXIT_FAILURE;
++        goto return_cleanup;
++    }
++
+     if (success)
+     {
+         if (HostConfigFlags::flags.CustomConfigFile != NULL) 
