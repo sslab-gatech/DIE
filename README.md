@@ -63,13 +63,9 @@ To check the redis-data,
 $ redis-cli -p 9000
 127.0.0.1:9000> keys *
 ```
-If the result contains fuzzers:fuzzer-* keys, the fuzzer was well registered and executed.
+If the result contains "crashBitmap", "crashQueue", "pathBitmap", "newPathsQueue" keys, the fuzzer was well registered and executed.
 
-You can check the corpus is being executed with below command as well.
-```
-$ tmux ls
-```
-If a session named `corpus` exists, it's still executing corpus.
+
 ### Client Setup
 * Make ssh-tunnel for connection with redis-server
 ```
