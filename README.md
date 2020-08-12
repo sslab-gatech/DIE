@@ -53,7 +53,9 @@ $ ./fuzz/scripts/redis.py
 ```
 * Dry run with corpus
 ```
-$ ./fuzz/scripts/populate.sh [target binary path]
+$ ./fuzz/scripts/populate.sh [target binary path] [path of DIE-corpus dir] [target js engine (ch/jsc/v8/ffx)]
+# Example
+$ ./fuzz/scripts/populate.sh ~/ch ./DIE-corpus ch
 ```
 It's done! Your corpus is well executed and the data should be located on redis-server.
 
@@ -74,7 +76,9 @@ $ ./fuzz/scripts/redis.py
 
 * Usage
 ```
-$ ./fuzz/scripts/run.sh [target binary path]
+$ ./fuzz/scripts/run.sh [target binary path] [path of DIE-corpus dir] [target js engine (ch/jsc/v8/ffx)]
+# Example
+$ ./fuzz/scripts/run.sh ~/ch ./DIE-corpus ch
 ```
 
 * Check if it's running
