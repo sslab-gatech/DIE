@@ -87,6 +87,18 @@ $ tmux ls
 ```
 You can find a session named `fuzzer` if it's running.
 
+### Typer
+
+We used d8 to profile type information. So, please change 
+d8_path in fuzz/TS/typer/typer.py before execution.
+
+```
+cd fuzz/TS/typer
+python3 typer.py [corpus directory]
+```
+*.jsi file will be created if instrumentation works well. 
+*.t file will be created if profiling works well.
+
 ## CVEs
 If you find bugs and get CVEs by running DIE, please let us know.
 
