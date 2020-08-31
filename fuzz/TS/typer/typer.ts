@@ -4,7 +4,6 @@ import * as SP from "child_process";
 
 import {parse} from "@babel/parser";
 import traverse, { NodePath, Node } from "@babel/traverse";
-import { printf, assert, CPair } from "../base/utils";
 import * as t from "@babel/types";
 
 // <line, isBefore?>
