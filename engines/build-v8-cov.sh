@@ -15,6 +15,7 @@ export CXX="$PWD/compiler/clang++"
 
 pushd v8-$1/v8
 
+# only for mindwipe..
 export PYTHONHTTPSVERIFY=0
 gclient sync
 
@@ -25,10 +26,11 @@ rm -rf out/Debug
 gn args out/Debug
 cp ../../utils/args_debug.gn out/Debug/args.gn
 gn args out/Debug
-rm third_party/llvm-build/Release+Asserts/bin/clang third_party/llvm-build/Release+Asserts/bin/clang++ third_party/llvm-build/Release+Asserts/bin/clang-cl
+mv third_party/llvm-build/Release+Asserts/bin/clang third_party/llvm-build/Release+Asserts/bin/clang.bak
+#rm third_party/llvm-build/Release+Asserts/bin/clang++ third_party/llvm-build/Release+Asserts/bin/clang-cl
 ln -s $PWD/../../compiler/proxy.py third_party/llvm-build/Release+Asserts/bin/clang
-ln -s $PWD/../../compiler/proxy.py third_party/llvm-build/Release+Asserts/bin/clang++
-ln -s $PWD/../../compiler/proxy.py third_party/llvm-build/Release+Asserts/bin/clang-cl
+#ln -s $PWD/../../compiler/proxy.py third_party/llvm-build/Release+Asserts/bin/clang++
+#ln -s $PWD/../../compiler/proxy.py third_party/llvm-build/Release+Asserts/bin/clang-cl
 ninja -C out/Debug
 
 

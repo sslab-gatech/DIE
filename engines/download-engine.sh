@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# check webkit latest here: https://webkitgtk.org/releases/
 
 if [ -z $1 ] || [ -z $2 ] ; then
   echo "usage: $0 <engines> <version> (engines : ch, jsc, v8, sm)"

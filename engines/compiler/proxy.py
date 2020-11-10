@@ -74,25 +74,29 @@ def remove(l, e):
         pass
 
 def rewrite(cmdline):
+    new_cmdline = []
     engine = find_engine(cmdline)
     if engine == "V8":
         remove(cmdline, "-fcomplete-member-pointers")
         remove(cmdline, "-fcrash-diagnostics-dir=../../tools/clang/crashreports")
-        remove(cmdline, "-Wno-ignored-pragma-optimize")
-        remove(cmdline, "-Wno-implicit-int-float-conversion")
-        remove(cmdline, "-Wno-c99-designator")
-        remove(cmdline, "-Wno-final-dtor-non-final-class")
-        remove(cmdline, "-Wno-sizeof-array-div")
+        remove(cmdline, "-Werror")
         for arg in cmdline:
             if "--color-diagnostics" in arg:
-                cmdline[cmdline.index(arg)] = arg.replace("--color-diagnostics", "")
+                # cmdline[cmdline.index(arg)] = arg.replace("--color-diagnostics", "")
+                continue
             if "-fuse-ld=lld" in arg:
-                cmdline[cmdline.index(arg)] = arg.replace("-fuse-ld=lld", "")
+                # cmdline[cmdline.index(arg)] = arg.replace("-fuse-ld=lld", "")
+                continue
             if "-Wa,-fdebug-compilation-dir,." in arg:
-                cmdline[cmdline.index(arg)] = arg.replace("-Wa,-fdebug-compilation-dir,.", "")
+                # cmdline[cmdline.index(arg)] = arg.replace("-Wa,-fdebug-compilation-dir,.", "")
+                continue
+            if "--no-call-graph-profile-sort" in arg:
+                continue
+            new_cmdline.append(arg)
+    print(new_cmdline)
 
 
-    return cmdline
+    return new_cmdline
 
 if __name__ == '__main__':
     new_cmdline = sys.argv[:]
